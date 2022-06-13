@@ -5,14 +5,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
         classpath 'com.gradle.publish:plugin-publish-plugin:0.9.1'
         classpath 'net.minecraftforge:GradleUtils:1.+'
     }
 }
 
+plugins {
+    id "com.github.hierynomus.license" version "0.16+"
+}
+
 apply plugin: 'groovy'
-apply plugin: 'license'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'com.gradle.plugin-publish'
@@ -28,7 +30,7 @@ ext.commit = project.hasProperty("commit") ? commit : 'unknown'
 group = 'org.spongepowered'
 version = buildType == 'SNAPSHOT' ? "$buildVersion-SNAPSHOT" : gradleutils.tagOffsetVersion
 archivesBaseName = 'mixingradle'
-sourceCompatibility = targetCompatibility = '1.8'
+sourceCompatibility = targetCompatibility = '1.17'
 
 repositories {
     mavenCentral()
@@ -39,7 +41,7 @@ repositories {
 
 dependencies {
     implementation gradleApi()
-    implementation 'com.google.guava:guava:21.0'
+    implementation 'com.google.guava:guava:31.0+'
     implementation 'org.ow2.asm:asm-tree:9.2'
 }
 
