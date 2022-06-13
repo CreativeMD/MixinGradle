@@ -1011,7 +1011,8 @@ public class MixinExtension {
             // Copy the new one if it was successfully generated
             if (refMapFile.exists()) {
                 taskSpecificRefMap.parentFile.mkdirs()
-                Files.copy(refMapFile, taskSpecificRefMap) 
+                //Files.copy(refMapFile, taskSpecificRefMap) 
+				copyFileUsingStream(refMapFile, taskSpecificRefMap)
             }
         }
         
@@ -1138,6 +1139,23 @@ public class MixinExtension {
         }
         this.importLibs += lib
     }
+	
+	void copyFileUsingStream(File source, File dest) throws IOException {
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			is = new FileInputStream(source);
+			os = new FileOutputStream(dest);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = is.read(buffer)) > 0) {
+				os.write(buffer, 0, length);
+			}
+		} finally {
+			is.close();
+			os.close();
+		}
+	}
 
     /**
      * Generates an "imports" file given the currently specified imports. If the
