@@ -22,9 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package org.spongepowered.asm.gradle.plugins
 
 import groovy.xml.MarkupBuilder
+import org.gradle.api.tasks.InputFiles
 
 import java.util.Collections
 import java.util.Enumeration
@@ -36,7 +38,6 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
-import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
@@ -89,12 +90,12 @@ public class MixinEclipse {
     
     static class EclipseJdtAptTask extends DefaultTask {
         @InputFile File mappingsIn
-        @OutputFile File refmapOut = project.file("build/${name}/mixins.refmap.json")
-        @OutputFile File mappingsOut = project.file("build/${name}/mixins.mappings.tsrg")
+        @InputFile File refmapOut = project.file("build/${name}/mixins.refmap.json")
+        @InputFile File mappingsOut = project.file("build/${name}/mixins.mappings.tsrg")
         @Input Map<String, String> processorOptions = new TreeMap<>()
         
-        @OutputFile File genTestDir = project.file('build/.apt_generated_test')
-        @OutputFile File genDir = project.file('build/.apt_generated')
+        @InputFile File genTestDir = project.file('build/.apt_generated_test')
+        @InputFile File genDir = project.file('build/.apt_generated')
         
         @OutputFile File output
         
