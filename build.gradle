@@ -14,9 +14,13 @@ ext.ciSystem = project.hasProperty("ciSystem") ? ciSystem : 'unknown'
 ext.commit = project.hasProperty("commit") ? commit : 'unknown'
 
 group = 'org.spongepowered'
-version = '0.7.37' //buildType == 'SNAPSHOT' ? "$buildVersion-SNAPSHOT" : gradleutils.tagOffsetVersion
+version = buildType == 'SNAPSHOT' ? "$buildVersion-SNAPSHOT" : gradleutils.tagOffsetVersion
 archivesBaseName = 'mixingradle'
-sourceCompatibility = targetCompatibility = '1.17'
+sourceCompatibility = targetCompatibility = '1.8'
+
+if (JavaVersion.current() != JavaVersion.VERSION_1_8) {
+    throw new GradleException("The use of the groovydoc task requires the Gradle JVM to be JRE 1.8; please change your Gradle JVM to 1.8")
+}
 
 repositories {
     mavenCentral()
@@ -26,8 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation gradleApi()
-    implementation 'com.google.guava:guava:31.0+'
+    implementation 'com.google.guava:guava:21.0'
     implementation 'org.ow2.asm:asm-tree:9.2'
 }
 
