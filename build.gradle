@@ -14,7 +14,7 @@ ext.ciSystem = project.hasProperty("ciSystem") ? ciSystem : 'unknown'
 ext.commit = project.hasProperty("commit") ? commit : 'unknown'
 
 group = 'org.spongepowered'
-version = buildType == 'SNAPSHOT' ? "$buildVersion-SNAPSHOT" : gradleutils.tagOffsetVersion
+version = '0.7.39' //buildType == 'SNAPSHOT' ? "$buildVersion-SNAPSHOT" : gradleutils.tagOffsetVersion
 archivesBaseName = 'mixingradle'
 sourceCompatibility = targetCompatibility = '1.8'
 
